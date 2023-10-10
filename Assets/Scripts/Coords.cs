@@ -5,11 +5,31 @@ using UnityEngine.Tilemaps;
 
 public class Coords : MonoBehaviour
 {
-    private void GetMouseButtonDown(Transform eventData)
+    public Tilemap tilemap; 
+
+    private void Update()
     {
-        Debug.Log("Clicked at " + eventData.position.x + ", " + eventData.position.y);
-        Tilemap tilemap = gameObject.GetComponent<Tilemap>();
-        Vector3Int cellPos = tilemap.WorldToCell(new Vector3(eventData.position.x, eventData.position.y, 0));
-        Debug.Log("Clicked at " + cellPos.x + ", " + cellPos.y);
+        if (Input.GetMouseButtonDown(1)) 
+        {
+            Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3Int cellPosition = tilemap.WorldToCell(mouseWorldPos);
+            int x = cellPosition.x;
+            int y = cellPosition.y;
+            int z = cellPosition.z;
+
+            Debug.Log("Coordenadas del tile: (" + x + ", " + y + ", " + z + ")");
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3Int cellPosition = tilemap.WorldToCell(mouseWorldPos);
+            int x = cellPosition.x;
+            int y = cellPosition.y;
+            int z = cellPosition.z;
+
+            Debug.Log("Coordenadas del objetivo: (" + x + ", " + y + ", " + z + ")");
+        }
     }
+
 }
